@@ -1,0 +1,6 @@
+{
+  "name": "Nexus: AI Agent Marketplace",
+  "description": "A next-generation platform for buying, selling, and deploying autonomous AI agents that generate income and handle complex workflows.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["AI Agent Orchestration", "Real-time Marketplace", "Revenue Dashboard"]
+}

@@ -1,0 +1,83 @@
+{
+  "entities": {
+    "User": {
+      "title": "User Profile",
+      "description": "Public and private information for platform users.",
+      "type": "object",
+      "properties": {
+        "displayName": { "type": "string" },
+        "photoURL": { "type": "string" },
+        "bio": { "type": "string" },
+        "role": { "type": "string", "enum": ["user", "creator", "admin"] },
+        "earnings": { "type": "number" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["displayName", "role", "createdAt"]
+    },
+    "Agent": {
+      "title": "AI Agent",
+      "description": "Metadata and instructions for an AI agent listing.",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "description": { "type": "string" },
+        "creatorId": { "type": "string" },
+        "creatorName": { "type": "string" },
+        "category": { "type": "string", "enum": ["productivity", "trading", "creative", "technical", "social"] },
+        "price": { "type": "number" },
+        "instructions": { "type": "string" },
+        "capabilities": { "type": "array", "items": { "type": "string" } },
+        "rating": { "type": "number" },
+        "salesCount": { "type": "number" },
+        "imageUrl": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["name", "description", "creatorId", "price", "instructions", "createdAt"]
+    },
+    "Deployment": {
+      "title": "Agent Deployment",
+      "description": "A user's active instance or ownership of an agent.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "agentId": { "type": "string" },
+        "agentName": { "type": "string" },
+        "status": { "type": "string", "enum": ["active", "paused", "stopped"] },
+        "lastRun": { "type": "string", "format": "date-time" },
+        "purchasedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "agentId", "status", "purchasedAt"]
+    },
+    "Transaction": {
+      "title": "Transaction record",
+      "description": "Record of an agent purchase.",
+      "type": "object",
+      "properties": {
+        "buyerId": { "type": "string" },
+        "sellerId": { "type": "string" },
+        "agentId": { "type": "string" },
+        "amount": { "type": "number" },
+        "timestamp": { "type": "string", "format": "date-time" }
+      },
+      "required": ["buyerId", "sellerId", "agentId", "amount", "timestamp"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User profile documents."
+    },
+    "/agents/{agentId}": {
+      "schema": "Agent",
+      "description": "A marketplace listing for an AI agent."
+    },
+    "/deployments/{deploymentId}": {
+      "schema": "Deployment",
+      "description": "Records of users owning and deploying agents."
+    },
+    "/transactions/{transactionId}": {
+      "schema": "Transaction",
+      "description": "History of sales on the platform."
+    }
+  }
+}
